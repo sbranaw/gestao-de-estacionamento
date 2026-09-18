@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portaria - Gestão de Estacionamento</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header & Search -->
+        <header class="header glass">
+            <div class="header-content">
+                <div class="logo-area">
+                    <i class="ph ph-car-profile"></i>
+                    <div>
+                        <h1>Portaria</h1>
+                        <p>Controle de Acesso</p>
+                    </div>
+                </div>
+                
+                <div class="search-bar">
+                    <i class="ph ph-magnifying-glass"></i>
+                    <input type="text" id="searchInput" placeholder="Buscar por placa, nome ou unidade...">
+                </div>
+                
+                <button id="btnNewRecord" class="action-btn" style="white-space: nowrap;">
+                    <i class="ph ph-plus"></i> Novo Registro
+                </button>
+            </div>
+            
+            <!-- Filters -->
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="presentes">Presentes no Pátio</button>
+                <button class="filter-btn" data-filter="aguardando">Aguardando Liberação</button>
+                <button class="filter-btn" data-filter="nao_autorizados">Não Autorizados</button>
+                <button class="filter-btn" data-filter="vaga_fixa">Vagas Fixas</button>
+                <button class="filter-btn" data-filter="vaga_esporadica">Vagas Esporádicas</button>
+                <button class="filter-btn" data-filter="vaga_visitante">Vagas Visitantes</button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div id="cardsContainer" class="cards-grid">
+                <!-- Cards renderizados via JS -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast hidden">
+        <i class="ph ph-check-circle"></i>
+        <span id="toastMessage">Ação realizada com sucesso!</span>
+    </div>
+
+    <!-- Modal de Detalhes / Edição -->
+    <div id="vehicleModal" class="modal hidden">
+        <div class="modal-content glass">
+            <div class="modal-header">
+                <h2 id="modalTitle">Detalhes do Veículo</h2>
+                <button id="closeModal" class="icon-btn"><i class="ph ph-x"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="vehicleForm">
+                    <input type="hidden" id="formVehicleId">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Nome do Usuário</label>
+                            <input type="text" id="formName" required disabled>
+                        </div>
+                        <div class="form-group">
+                            <label>Unidade / Bloco</label>
+                            <input type="text" id="formUnit" required disabled>
+                        </div>
+                        <div class="form-group">
+                            <label>Telefone</label>
+                            <input type="text" id="formPhone" required disabled>
+                        </div>
+                        <div class="form-group">
+                            <label>Placa</label>
+                            <input type="text" id="formPlate" required disabled>
+                        </div>
+                        <div class="form-group">
+                            <label>Modelo / Cor</label>
+                            <input type="text" id="formModel" required disabled>
+                        </div>
+                        <div class="form-group">
+                            <label>Tipo</label>
+                            <select id="formType" required disabled>
+                                <option value="Carro">Carro</option>
+                                <option value="Moto">Moto</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Tipo de Vaga</label>
+                            <select id="formSpotType" required disabled>
+                                <option value="Fixa">Fixa</option>
+                                <option value="Esporádica">Esporádica</option>
+                                <option value="Visitante">Visitante</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Autorização</label>
+                            <select id="formAuthStatus" required disabled>
+                                <option value="Autorizado">Autorizado</option>
+                                <option value="Pendente">Pendente</option>
+                                <option value="Não Autorizado">Não Autorizado</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="btnEdit" class="action-btn btn-outline"><i class="ph ph-pencil"></i> Editar</button>
+                <button id="btnDelete" class="action-btn btn-outline" style="color: var(--status-red); border-color: var(--status-red);"><i class="ph ph-trash"></i> Excluir</button>
+                <button id="btnCancelEdit" class="action-btn btn-outline hidden">Cancelar</button>
+                <button id="btnSave" class="action-btn hidden" type="submit" form="vehicleForm"><i class="ph ph-check"></i> Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
